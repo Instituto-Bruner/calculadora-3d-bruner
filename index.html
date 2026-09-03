@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#6915dc">
+  <meta name="description" content="Calculá el costo real y el precio de venta de tus impresiones 3D. Una herramienta local, simple y sin conexión.">
+  <title>Calculadora 3D Bruner</title>
+  <style>
+:root{color-scheme:light;--ink:#233d36;--muted:#718079;--green:#173e35;--accent:#d6edaa;--paper:#f5f6f1;--border:#e0e5dc;--white:#fff;--red:#a3342e;font-family:Inter,"Segoe UI",Arial,sans-serif;font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5}button,input,select{font:inherit}button{cursor:pointer}button,input,select,summary{touch-action:manipulation}button:focus-visible,summary:focus-visible,.help:focus-visible{outline:3px solid #77a563;outline-offset:3px}button:disabled{cursor:not-allowed;opacity:.5}[hidden]{display:none!important}.topbar{height:88px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 max(28px,calc((100vw - 1240px)/2));background:#fcfdf9}.brand{display:flex;gap:12px;align-items:center;font-size:27px;font-weight:750;letter-spacing:-1px;line-height:1.1}.brand span:not(.brand-icon){display:block;font-size:11px;font-weight:400;letter-spacing:.3px;margin-top:5px;color:var(--muted)}.brand-icon{font-size:36px;display:grid;place-items:center;border-radius:12px;background:var(--green);color:var(--accent);width:46px;height:46px}.local-badge{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}.local-badge i{width:7px;height:7px;background:#6f9757;border-radius:100%}main{max-width:1240px;margin:auto;padding:42px 28px 0}.page-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:32px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.8px;margin:0 0 10px;color:#687c68}h1{font-size:34px;line-height:1.2;letter-spacing:-1.3px;margin:0 0 10px;font-weight:650}.page-heading p:last-child,.view-heading p{color:var(--muted);margin:0;font-size:14px}.button{border:1px solid transparent;border-radius:9px;padding:12px 18px;font-weight:600;min-height:46px;transition:background .15s}.secondary{background:var(--white);border-color:var(--border);color:var(--ink)}.secondary:hover{background:#ecf0e7}.primary{background:var(--green);color:white}.primary:hover{background:#285749}.small{font-size:12px;padding:8px 12px;min-height:38px}.full{width:100%}.tabs{display:flex;gap:30px;border-bottom:1px solid var(--border);margin-bottom:26px}.tab{background:none;border:0;border-bottom:2px solid transparent;padding:0 0 14px;color:var(--muted);font-weight:550}.tab.active{color:var(--green);border-bottom-color:var(--green)}.tab span{font-size:10px;border-radius:5px;background:#e6eadf;padding:2px 6px;margin-left:5px}.calculator-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:26px;align-items:start}.card{background:var(--white);border:1px solid var(--border);border-radius:13px;padding:24px;margin-bottom:18px}.section-title{display:flex;align-items:center;gap:10px;margin-bottom:22px}.section-title h2{margin:0}.section-title .text-button,.section-note{margin-left:auto}.section-note{color:var(--muted);font-size:11px}.step{color:#6e8265;border:1px solid #dfe5d8;border-radius:6px;font-size:10px;font-weight:600;padding:4px 6px}h2{font-size:17px;letter-spacing:-.3px;margin:0 0 20px;font-weight:650}h3{font-size:13px;font-weight:650;margin:22px 0 14px}.grid{display:grid;gap:18px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.piece-grid{grid-template-columns:minmax(0,1fr) 100px}label{font-size:12px;font-weight:550;display:block;min-width:0}.optional{font-size:10px;color:var(--muted);font-weight:400;margin-left:4px}input:not([type=checkbox]),select{width:100%;min-width:0;height:46px;border:1px solid #dce2d9;border-radius:7px;background:#fbfcf9;color:var(--ink);padding:0 12px;margin-top:8px;outline:none;font-size:14px}input:focus,select:focus{border-color:#6b9168;box-shadow:0 0 0 3px #e6eddd}input[aria-invalid=true]{border-color:var(--red);background:#fff7f4}.hint{font-size:11px;color:var(--muted);font-weight:400;line-height:1.6;margin:10px 0 0}.callout{background:#f3f6ed;padding:10px 12px;border-radius:7px;margin-top:18px}.callout strong{font-weight:600;color:#657358}.text-button{background:transparent;border:0;padding:4px 0;color:#4f765a;font-size:11px;font-weight:600}.text-button:hover{text-decoration:underline}.help{position:relative;display:inline-grid;place-items:center;width:15px;height:15px;color:#7b8971;border:1px solid #bac5b0;border-radius:50%;font-size:10px;cursor:help}.help:hover:after,.help:focus:after{content:attr(data-help);position:absolute;bottom:25px;left:50%;transform:translateX(-65%);z-index:5;width:210px;background:var(--green);color:white;padding:12px;border-radius:7px;box-shadow:0 5px 20px #10271c22;font-size:12px;line-height:1.5;font-weight:400}.mini-summary{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid #edf0e8;margin-top:18px;padding-top:13px;font-size:11px;color:var(--muted)}.mini-summary strong{color:var(--ink);font-size:13px}.time-readout{align-self:end;padding:7px 0 7px 14px;border-left:1px solid var(--border)}.time-readout span{font-size:9px;letter-spacing:1px;color:var(--muted);display:block}.time-readout strong{font-size:15px;display:block;margin-top:4px;font-weight:550}.cost-setting{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid #edf0e8;font-size:12px}.cost-setting .hint{margin-top:4px}.toggle-label{display:flex;align-items:center;gap:8px}input[type=checkbox]{accent-color:var(--green);width:17px;height:17px;margin:0}.extras-section{margin-top:20px;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}summary{cursor:pointer;font-size:12px;font-weight:600}summary span{float:right;color:var(--muted);font-weight:400}.extra-row{display:grid;grid-template-columns:minmax(0,1fr) 120px 30px;gap:10px;align-items:center;margin:10px 0}.extra-row input{margin:0}.delete-button{background:none;border:0;color:#8c746e;font-size:22px;min-height:40px;border-radius:5px}.delete-button:hover{background:#fff0e9}.risk-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:center;margin-top:20px}.risk-row .hint{margin:20px 0 0}.method-help{min-height:36px;margin-bottom:18px}.results{position:sticky;top:20px}.result-card{background:var(--green);color:#f8fcf4;padding:27px;border-radius:15px;box-shadow:0 10px 30px #173e3510}.result-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}.result-heading .eyebrow{color:#c0d4a8;margin:0}.live-dot{font-size:10px;color:#bfcfc7}.live-dot:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin-right:6px}.result-card h2{font-size:12px;letter-spacing:0;color:#d2dfd4;font-weight:400;margin-bottom:7px}.hero-price{font-size:39px;font-weight:600;letter-spacing:-1.4px;line-height:1.15;overflow-wrap:anywhere;color:var(--accent);font-variant-numeric:tabular-nums}.unit-price{font-size:11px;color:#b8cdbd;margin:12px 0 24px}.unit-price strong{font-weight:600;color:#fff}.unit-price span{margin-left:5px}.profit-strip{display:grid;grid-template-columns:1.1fr 1fr;gap:10px;border-top:1px solid #ffffff20;border-bottom:1px solid #ffffff20;padding:19px 0}.profit-strip span{display:block;font-size:10px;color:#b8cdbd}.profit-strip strong{display:block;font-size:19px;font-weight:500;margin-top:5px;overflow-wrap:anywhere}.result-card h3{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#b6cdbb;margin:25px 0 16px}dl{margin:0}dl>div{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:11px}dt{color:#d8e5db;display:flex;align-items:center;gap:8px}dd{margin:0;font-variant-numeric:tabular-nums}.swatch{width:6px;height:6px;border-radius:2px;display:inline-block}.material-color{background:#cce6a3}.electricity-color{background:#dfcb7b}.machine-color{background:#94c8ac}.labor-color{background:#82adc4}.extras-color{background:#c9b2cf}.risk-color{background:#c8916e}.cost-bar{display:flex;height:5px;overflow:hidden;border-radius:5px;margin:20px 0}.cost-bar span{height:100%}.total-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;margin:10px 0}.total-row.sub{color:#b8cdbd;font-size:11px;margin-bottom:26px}.result-card .primary{background:var(--accent);color:var(--green)}.result-card .primary:hover{background:#e1f3bf}.result-footnote{font-size:9px;text-align:center;color:#acbfae;margin:12px 0 0}.formula-card{padding:20px 8px;color:var(--muted)}.formula-card p{font-size:11px;line-height:1.7}.formula-card summary{color:#657966}.result-error{font-size:12px;padding:12px;background:#fff2df;color:#743c25;border-radius:7px;margin-bottom:18px}.notice{padding:13px 17px;border:1px solid #c9d8b7;background:#eaf2de;border-radius:8px;font-size:12px;margin:0 0 20px}.warning{background:#fff1e9;border-color:#e7c5b4;color:#86462b}.view-heading{margin:32px 0 24px}.view-heading h2{font-size:24px;margin-bottom:6px}.materials-head,.material-row{display:grid;grid-template-columns:1fr 1fr 1fr 35px;gap:15px;align-items:center}.materials-head{font-size:11px;color:var(--muted)}.material-row{margin-top:8px}.material-row input{margin:0}.settings-grid{gap:18px}.settings-grid .card{height:100%;margin:0}.settings-actions{display:flex;gap:12px;margin:24px 0}.danger{color:var(--red)}.empty-state{text-align:center;background:white;border:1px dashed #cdd7c4;border-radius:14px;padding:65px 20px}.empty-state h3{font-size:20px;margin:0 0 10px}.empty-state p{color:var(--muted)}.history-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:15px}.history-card h3{font-size:18px;margin:0 0 5px;overflow-wrap:anywhere}.history-card .history-meta{color:var(--muted);font-size:12px}.history-card .history-price{font-size:22px;font-weight:600;text-align:right}.history-actions{display:flex;gap:8px;grid-column:1/-1;border-top:1px solid var(--border);padding-top:15px}.history-details{font-size:12px;color:var(--muted);grid-column:1/-1}.history-details p{line-height:1.8}.history-price small{display:block;color:var(--muted);font-size:10px;font-weight:400}.history-card time{font-size:10px;color:var(--muted)}footer{display:flex;justify-content:space-between;gap:16px;color:#869080;border-top:1px solid var(--border);font-size:10px;padding:25px 0;margin-top:38px}footer strong{color:#607558;font-size:12px}input,select{font-variant-numeric:tabular-nums}@media(min-width:1500px){main{padding-top:50px}}@media(max-width:1050px){.calculator-layout{grid-template-columns:minmax(0,1fr) 330px;gap:18px}.card{padding:20px}.result-card{padding:23px}.three{gap:12px}.optional{display:block;margin:0}.hero-price{font-size:34px}.section-note{display:none}}@media(max-width:800px){main{padding:28px 18px 0}.topbar{height:76px;padding:0 18px}.calculator-layout{grid-template-columns:1fr}.results{position:static}.page-heading{gap:16px}.page-heading h1{font-size:28px}.page-heading .button{font-size:12px;padding:10px 13px}.eyebrow{font-size:8px}.settings-grid{grid-template-columns:1fr}.hero-price{font-size:42px}.result-card{padding:27px}.local-badge{font-size:10px}.view-heading h2{font-size:22px}.materials-head{display:none}.material-row{grid-template-columns:1fr 1fr 32px;border-bottom:1px solid var(--border);padding-bottom:15px;margin-bottom:15px}.material-row label:first-child{grid-column:1/3}.material-row .delete-button{grid-column:3;grid-row:1}.material-row label:before{content:attr(data-mobile-label);font-size:10px;color:var(--muted);display:block;margin-bottom:4px}.history-card{grid-template-columns:1fr}.history-card .history-price{text-align:left}footer{font-size:9px}}@media(max-width:480px){.topbar .local-badge{display:none}.page-heading{align-items:start;flex-direction:column;margin-bottom:24px}.page-heading h1{font-size:30px}.page-heading .button{align-self:flex-start}.tabs{gap:24px;font-size:13px}.card{padding:19px 16px}.three{grid-template-columns:1fr 1fr}.three>label:first-child:last-of-type{grid-column:auto}#job-form .card:nth-child(2) .three>label:first-child{grid-column:1/-1}.time-readout{grid-column:1/-1;border-left:0;border-top:1px solid var(--border);padding:10px 0 0;display:flex;justify-content:space-between;align-items:center}.time-readout strong{margin:0}.grid{gap:14px}.piece-grid{grid-template-columns:minmax(0,1fr) 80px}.risk-row{grid-template-columns:1fr 1fr;gap:14px}.extra-row{grid-template-columns:minmax(0,1fr) 100px 28px;gap:5px}.section-title{gap:8px}.section-title h2{font-size:16px}.settings-actions{flex-direction:column}.hero-price{font-size:37px}.history-actions{flex-wrap:wrap}input:not([type=checkbox]),select{font-size:16px}footer{flex-direction:column;gap:6px}.mini-summary span{max-width:73%}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.order-material{margin-top:22px;padding-bottom:8px;border-bottom:1px solid #ffffff20}.order-material dl>div{align-items:start}.order-material dt{max-width:56%;font-size:11px}.order-material dd{max-width:44%;text-align:right;overflow-wrap:anywhere}.order-material p{font-size:10px;line-height:1.6;color:#b8cdbd}.results{position:static}
+/* Instituto Bruner: violeta, azul y superficies claras. */
+:root{--ink:#211637;--muted:#716783;--green:#6915dc;--accent:#cfefff;--paper:#f6f4fa;--border:#e4dfee;font-family:"Segoe UI",Arial,sans-serif}
+body{background:linear-gradient(180deg,#f0e9fc 0,#f8f7fb 380px)}.topbar{height:86px;background:#fff;border-top:4px solid #7510f4}.brand{gap:20px;letter-spacing:0}.brand img{width:178px;height:58px;object-fit:contain}.brand-divider{width:1px;height:34px;background:#e5dfed}.brand .brand-product{font-size:11px!important;line-height:1.5;color:#716783!important;margin:0!important}.brand-product strong{color:#352150}.local-badge i{background:#008dff}.page-heading{margin-bottom:24px}h1{font-size:33px;font-weight:750;letter-spacing:-1.2px}h1 em{font-style:normal;color:#7416de}.eyebrow{color:#75529f;letter-spacing:1.5px;font-size:10px}.tabs{gap:8px;border:1px solid #e0d7ed;border-radius:12px;padding:5px;background:#fff;max-width:470px}.tab{border:0;border-radius:8px;padding:10px 22px;flex:1}.tab.active{background:#efe6fc;color:#6317ca;font-weight:700}.tab span{background:#e2d5f7;color:#6317ca}.calculator-layout{grid-template-columns:minmax(0,1fr) 400px;gap:24px}.card{border-radius:14px;padding:21px 23px;box-shadow:0 3px 12px #35205203}.section-title{margin-bottom:17px}.step{background:#f2eaff;border-color:#e7d8fb;color:#7510db;font-weight:750}.text-button{color:#6925c3}.callout{background:#f4effc;color:#70607e}.mini-summary{border-color:#eee8f5}.mini-summary strong{color:#6519c4}.two,.three{gap:16px}input:not([type=checkbox]),select{background:#fdfcff;border-color:#ded7e7;height:46px}input:focus,select:focus{border-color:#8645dd;box-shadow:0 0 0 3px #efe5fd}.help{color:#795697;border-color:#c7aedf}.button:focus-visible,.help:focus-visible,summary:focus-visible{outline-color:#8d45e4}.secondary:hover{background:#f2eafb}.primary{background:#701add}.primary:hover{background:#5f12c1}.piece-grid{grid-template-columns:minmax(0,1fr) 174px}.quantity-control{display:flex;margin-top:8px;align-items:center;height:46px;border:1px solid #ded7e7;border-radius:8px;overflow:hidden;background:#fdfcff}.quantity-control input#units{margin:0;border:0;text-align:center;width:70px;flex:1;padding:0 4px;box-shadow:none;appearance:textfield}.quantity-control input::-webkit-inner-spin-button{appearance:none}.quantity-control button{background:#f3edfc;color:#6418c4;border:0;width:39px;align-self:stretch;font-size:20px}.quantity-control button:hover{background:#e4d4fb}.quantity-control:focus-within{outline:2px solid #9556ea}.advanced-costs>.section-title{margin:0;list-style:none}.advanced-costs summary::-webkit-details-marker{display:none}.summary-title{font-size:16px;font-weight:650}.expand-label{margin-left:auto;color:#6b30b9;font-size:11px}.advanced-intro{margin:16px 0 20px}.advanced-costs[open]>.section-title{padding-bottom:15px;border-bottom:1px solid #e8e1f1}.result-card{background:linear-gradient(150deg,#281244,#19294b);box-shadow:0 12px 28px #30145615;border:1px solid #38224e;padding:26px}.result-heading{margin-bottom:22px}.result-heading .eyebrow{color:#c9b0ed}.live-dot{color:#d4c9e3}.live-dot:before{background:#68cdff}.result-card h2{color:#d7cce7}.hero-price{font-size:40px;color:#fff}.unit-price{color:#c6b7d9;margin-bottom:19px}.profit-strip{background:#ffffff08;margin:0 -10px;padding:17px 10px;border-radius:9px;border-color:#ffffff16}.profit-strip strong{color:#89daff;font-size:22px;font-weight:650}.profit-strip span{color:#d0c4df}.order-material{margin-top:20px}.result-card h3{color:#d0bbed;margin-top:18px}.order-material dt,dt{color:#d9d0e5}.order-material dd{font-weight:600}.order-material p,.result-footnote{color:#bfb2d1}.order-material p{margin-bottom:17px}.breakdown-details{margin-top:18px;padding:12px 0;border-bottom:1px solid #ffffff20}.breakdown-details summary{color:#d5c9e5;font-weight:500}.total-row{margin-top:17px}.total-row.sub{margin-top:8px;margin-bottom:20px;color:#c6b7d9}.result-card .primary{background:#872bf1;color:#fff;border:1px solid #a855ff}.result-card .primary:hover{background:#973ff8}.back-to-fields{display:block;margin:15px auto 0;border:0;background:transparent;color:#c7b4e0;font-size:11px}.formula-card summary{color:#70558d}.result-error{background:#eee7f9;color:#48256e}.notice{background:#f0e8fc;border-color:#ddcaf8;color:#4d2875}.warning{background:#fff1e9;color:#86462b}.material-color{background:#b878ff}.machine-color{background:#688dff}.electricity-color{background:#ffd078}.labor-color{background:#66ceff}.extras-color{background:#e7a9e7}.risk-color{background:#faac8b}.formula-card{color:#746581}.time-readout{border-color:#e5dbf0}.time-readout strong{color:#5b3390}.results:focus{outline:none}.mobile-result{display:none}.history-price{color:#6819cb}.empty-state{border-color:#d8c5ee}footer{color:#897999}footer strong{color:#6924ac}
+@media(min-width:1100px){main{padding-top:30px}.results{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow:auto;scrollbar-width:thin;scrollbar-color:#d6c0ed transparent}}
+@media(max-width:1050px){.calculator-layout{grid-template-columns:minmax(0,1fr) 340px;gap:18px}.card{padding:20px}.piece-grid{grid-template-columns:minmax(0,1fr) 145px}.hero-price{font-size:34px}}
+@media(max-width:800px){.calculator-layout{grid-template-columns:1fr}.results{position:static;max-height:none;overflow:visible;scroll-margin-top:18px}.topbar{height:80px}.brand img{width:155px;height:50px}.brand-divider,.brand .brand-product{display:none!important}main{padding-top:25px;padding-bottom:80px}.tabs{max-width:none}.tab{padding:10px 12px}.mobile-result:not([hidden]){display:flex;position:fixed;z-index:20;bottom:12px;left:16px;right:16px;width:calc(100% - 32px);justify-content:space-between;align-items:center;text-align:left;background:#6420c5;color:#fff;border:1px solid #9a55e4;border-radius:13px;padding:12px 17px;box-shadow:0 8px 28px #31096340;font-size:12px}.mobile-result strong{display:block;font-size:19px;font-weight:700;margin-top:2px}.mobile-result>span:first-child{font-size:10px;color:#ead9ff}.mobile-result>span:last-child{font-weight:650}.hero-price{font-size:40px}.page-heading h1{font-size:30px}.card{padding:20px}.section-note{display:none}}
+@media(max-width:480px){.piece-grid{grid-template-columns:1fr}.quantity-control{width:170px}.page-heading{gap:14px}.page-heading h1{font-size:29px}.page-heading .eyebrow{font-size:9px}.page-heading p:last-child{font-size:13px;line-height:1.6}.card{padding:19px 16px}.tabs{gap:2px}.tab{font-size:12px;padding:10px 8px}.section-title{gap:8px}.summary-title{font-size:14px}.expand-label{font-size:10px}.result-card{padding:24px}.hero-price{font-size:36px}.local-badge{display:none}.brand img{width:161px}}
+
+</style>
+  
+</head>
+<body>
+  <header class="topbar"><div class="brand"><img src="data:image/png;base64,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" alt="Instituto Bruner"><span class="brand-divider"></span><span class="brand-product">Herramientas<br><strong>para crear</strong></span></div><span class="local-badge"><i></i> Funciona sin conexión</span></header>
+  <main>
+    <div class="page-heading"><div><p class="eyebrow">DEL DISEÑO A UN NEGOCIO RENTABLE</p><h1>Calculadora 3D <em>Bruner</em></h1><p>Ingresá tu pieza, elegí la cantidad y conocé cuánto invertir y ganar.</p></div><button id="new-job" class="button secondary">＋ Nuevo cálculo</button></div>
+    <nav class="tabs" aria-label="Secciones"><button class="tab active" data-view="calculator" aria-current="page">Calculadora</button><button class="tab" data-view="history">Historial <span id="history-count">0</span></button><button class="tab" data-view="settings">Configuración</button></nav>
+    <div id="storage-warning" class="notice warning" role="alert" hidden></div>
+    <div id="status" class="notice" role="status" hidden></div>
+    <section id="calculator" class="view">
+      <div id="snapshot-notice" class="notice" hidden>Este cálculo usa las tarifas guardadas con el trabajo. <button id="use-current" class="text-button">Usar configuración actual</button></div>
+      <div class="calculator-layout">
+        <form id="job-form" novalidate>
+          <section class="card"><div class="section-title"><span class="step">01</span><h2>La pieza</h2><span class="section-note">Empezá acá</span></div>
+            <div class="grid piece-grid"><label>Nombre del trabajo <span class="optional">opcional hasta guardar</span><input id="job-name" type="text" maxlength="100" placeholder="Ej. Maceta Groot grande" autocomplete="off"></label><label>Unidades del pedido<div class="quantity-control"><button type="button" id="less-unit" aria-label="Quitar una unidad">−</button><input id="units" type="number" min="1" max="1000000" step="1" value="1" required><button type="button" id="more-unit" aria-label="Agregar una unidad">＋</button></div></label></div>
+            <label style="margin-top:18px">El peso y el tiempo que voy a ingresar son<select id="input-scope"><option value="unit">De una pieza · multiplicar por la cantidad</option><option value="total">Del trabajo completo · ya incluyen la cantidad</option></select></label>
+            <p class="hint callout" id="scope-help"></p>
+          </section>
+          <section class="card"><div class="section-title"><span class="step">02</span><h2>Material</h2><button type="button" class="text-button" data-go-settings>Editar tarifas ↗</button></div>
+            <div class="grid three"><label>Material<select id="material"></select></label><label><span id="weight-label">Peso de una pieza (g)</span><input id="grams" type="number" min="0" max="1000000000" step="any" placeholder="0" required></label><label>Desperdicio (%) <span class="help" tabindex="0" data-help="Material extra para purgas, soportes o brim. Si ya está incluido en el peso del laminador, usá 0%.">?</span><input id="waste" type="number" min="0" max="1000" step="any"></label></div>
+            <div class="mini-summary"><span id="material-rate"></span><strong id="material-subtotal"></strong></div>
+          </section>
+          <section class="card"><div class="section-title"><span class="step">03</span><h2>Tiempo de impresión</h2><span id="time-scope" class="section-note">De una pieza</span></div><div class="grid three"><label>Horas<input id="hours" type="number" min="0" max="1000000" step="1" placeholder="0"></label><label>Minutos<input id="minutes" type="number" min="0" max="59" step="1" placeholder="0"></label><div class="time-readout"><span>TIEMPO DEL PEDIDO</span><strong id="time-total">0 h 00 min</strong></div></div></section>
+          <details class="card advanced-costs"><summary class="section-title"><span class="step">04</span><span class="summary-title">Costos y trabajo manual</span><span class="expand-label">Ajustar ＋</span></summary><p class="hint advanced-intro">Electricidad y máquina se calculan con tus tarifas. Abrí esta sección para sumar preparación, terminación o gastos extra.</p>
+            <div class="cost-setting"><div><strong>Electricidad</strong><p id="electricity-rate" class="hint"></p></div><strong id="electricity-subtotal"></strong></div>
+            <div class="cost-setting"><div><label class="toggle-label"><input id="machine-enabled" type="checkbox" checked> Incluir uso de máquina <span class="help" tabindex="0" data-help="Reserva por hora para mantenimiento, repuestos y amortización de la impresora.">?</span></label><p id="machine-rate" class="hint"></p></div><strong id="machine-subtotal"></strong></div>
+            <h3>Tu tiempo también vale · pedido completo</h3><div class="grid two"><label>Preparación total (min)<input id="preparation" type="number" min="0" max="1000000" step="any" placeholder="0"></label><label>Postprocesado total (min)<input id="finishing" type="number" min="0" max="1000000" step="any" placeholder="0"></label></div><p class="hint" id="labor-rate"></p>
+            <details class="extras-section"><summary>Gastos adicionales <span id="extras-count">0 gastos</span></summary><p class="hint">Importes del trabajo completo: packaging, imanes, pintura, envío…</p><div id="extras"></div><button type="button" id="add-extra" class="button secondary small">＋ Agregar gasto</button></details>
+            <div class="risk-row"><label>Riesgo / fallas (%) <span class="help" tabindex="0" data-help="Reserva sobre material, electricidad, máquina y mano de obra. Los extras no reciben este recargo. No es ganancia.">?</span><input id="risk" type="number" min="0" max="1000" step="any"></label><p class="hint">Una reserva para repeticiones y fallas. Se aplica a los costos productivos, sin incluir extras.</p></div>
+          </details>
+          <section class="card"><div class="section-title"><span class="step">05</span><h2>Rentabilidad</h2></div><div class="grid two"><label>Método de precio<select id="method"><option value="markup">Recargo sobre costo</option><option value="margin">Margen sobre venta</option></select></label><label><span id="profit-label">Recargo deseado (%)</span><input id="profit" type="number" min="0" max="1000" step="any"></label></div><p class="hint method-help" id="method-help"></p><label>Redondear precio por unidad<select id="rounding"><option value="0">Sin redondear</option><option value="100">A 100</option><option value="500">A 500</option><option value="1000">A 1.000</option></select></label><p class="hint">Siempre hacia arriba. El precio total es el precio por unidad × cantidad.</p></section>
+        </form>
+        <aside id="results" class="results" tabindex="-1" aria-label="Resultado del cálculo"><div class="result-card"><div class="result-heading"><span class="eyebrow">TU PRESUPUESTO</span><span class="live-dot">En vivo</span></div><h2>Venta total del pedido</h2><div id="sale-total" class="hero-price">—</div><p class="unit-price"><strong id="sale-unit">—</strong> por unidad <span id="unit-count"></span></p><div id="form-errors" role="alert" class="result-error" hidden></div><div class="profit-strip"><div><span>Ganancia total del pedido</span><strong id="profit-total">—</strong></div><div><span>Margen real</span><strong id="real-margin">—</strong></div></div>
+          <section class="order-material"><h3>Filamento para este pedido</h3><dl><div><dt>Material total, con desperdicio</dt><dd id="order-grams">—</dd></div><div><dt>Costo del material consumido</dt><dd id="order-material">—</dd></div><div><dt>Rollos completos necesarios</dt><dd id="order-rolls">—</dd></div><div><dt>Compra de esos rollos</dt><dd id="order-purchase">—</dd></div><div><dt>Filamento que te sobra</dt><dd id="order-leftover">—</dd></div></dl><p>Compra estimada partiendo de cero stock. La ganancia descuenta el material consumido; el sobrante queda para otros trabajos. El riesgo es una reserva monetaria, no gramos extra: para prever más filamento, ajustá el desperdicio.</p></section><details class="breakdown-details"><summary>Ver desglose de costos</summary><dl id="breakdown"><div><dt><i class="swatch material-color"></i>Material</dt><dd id="cost-material">—</dd></div><div><dt><i class="swatch electricity-color"></i>Electricidad</dt><dd id="cost-electricity">—</dd></div><div><dt><i class="swatch machine-color"></i>Uso de máquina</dt><dd id="cost-machine">—</dd></div><div><dt><i class="swatch labor-color"></i>Mano de obra</dt><dd id="cost-labor">—</dd></div><div><dt><i class="swatch extras-color"></i>Extras</dt><dd id="cost-extras">—</dd></div><div><dt><i class="swatch risk-color"></i>Riesgo / fallas</dt><dd id="cost-risk">—</dd></div></dl><div id="cost-bar" class="cost-bar" aria-hidden="true"></div></details><div class="total-row"><span>Costo total del trabajo</span><strong id="cost-total">—</strong></div><div class="total-row sub"><span>Costo por unidad</span><strong id="cost-unit">—</strong></div>
+          <button id="save-job" class="button primary full">Guardar cálculo</button><p class="result-footnote">Guardado local · Sólo en este navegador</p><button type="button" id="back-to-fields" class="back-to-fields">↑ Volver a los datos de la pieza</button>
+        </div><details class="formula-card"><summary>¿Cómo se calcula?</summary><p>En modo «De una pieza», el peso y el tiempo se multiplican por la cantidad. En modo «Del trabajo completo», ya representan el pedido. La mano de obra y los extras siempre corresponden a todo el pedido.</p><p>Gramos necesarios = peso total × (1 + desperdicio ÷ 100). Rollos = redondeo hacia arriba de gramos necesarios ÷ peso del rollo. Compra = rollos × precio del rollo. Sobrante = capacidad de los rollos − gramos necesarios.</p><p>Material = (precio del rollo ÷ gramos del rollo) × peso del trabajo × (1 + desperdicio ÷ 100).</p><p>Electricidad = watts ÷ 1.000 × horas × tarifa del kWh.</p><p>Máquina = horas × tarifa de uso (si está activada).</p><p>Mano de obra = (preparación + postprocesado) ÷ 60 × valor de tu hora.</p><p>Riesgo = (material + electricidad + máquina + mano de obra) × riesgo ÷ 100.</p><p>Costo total = costos productivos + riesgo + extras.</p><p>Recargo: precio = costo × (1 + recargo ÷ 100). Margen: precio = costo ÷ (1 − margen ÷ 100).</p><p>El redondeo se aplica hacia arriba al precio por unidad. Ganancia = venta total − costo total. Margen real = ganancia ÷ venta total × 100.</p><p>Importes estimados. Agregá comisiones, impuestos u otros gastos que correspondan a tu trabajo.</p></details></aside>
+      </div>
+    </section>
+    <section id="history" class="view" hidden><div class="view-heading"><div><h2>Tus trabajos guardados</h2><p>Cada cálculo conserva sus materiales, tarifas y rentabilidad.</p></div></div><div id="history-list"></div></section>
+    <section id="settings" class="view" hidden><div class="view-heading"><div><h2>Los números de tu taller</h2><p>Valores iniciales de ejemplo. Ajustalos a tus costos reales.</p></div></div><form id="settings-form" novalidate><section class="card"><div class="section-title"><h2>Materiales y rollos</h2><button type="button" id="add-material" class="text-button">＋ Agregar material</button></div><div class="materials-head"><span>Material</span><span>Precio del rollo</span><span>Peso del rollo (g)</span><span></span></div><div id="materials-editor"></div></section><div class="grid two settings-grid"><section class="card"><h2>Impresora y trabajo</h2><div class="grid two"><label>Precio del kWh<input id="s-kwh" type="number" min="0" max="1000000000" step="any" required></label><label>Consumo promedio (W)<input id="s-watts" type="number" min="0" max="1000000000" step="any" required></label><label>Costo máquina / hora<input id="s-machine" type="number" min="0" max="1000000000" step="any" required></label><label>Valor de tu hora<input id="s-labor" type="number" min="0" max="1000000000" step="any" required></label></div></section><section class="card"><h2>Valores predeterminados</h2><div class="grid two"><label>Desperdicio (%)<input id="s-waste" type="number" min="0" max="1000" step="any" required></label><label>Riesgo / fallas (%)<input id="s-risk" type="number" min="0" max="1000" step="any" required></label><label>Método<select id="s-method"><option value="markup">Recargo sobre costo</option><option value="margin">Margen sobre venta</option></select></label><label>Rentabilidad (%)<input id="s-profit" type="number" min="0" max="1000" step="any" required></label><label>Símbolo de moneda<input id="s-currency" type="text" maxlength="12" placeholder="$ · USD · €" required></label></div></section></div><p class="hint">Guardar actualiza las tarifas del cálculo abierto. Desperdicio, riesgo y rentabilidad predeterminados se usan al iniciar un nuevo cálculo. Los trabajos del historial no cambian.</p><p id="settings-errors" class="notice warning" role="alert" hidden></p><div class="settings-actions"><button type="submit" class="button primary">Guardar configuración</button><button type="button" id="reset-settings" class="button secondary danger">Restablecer configuración</button></div></form></section>
+    <footer><span><strong>Instituto Bruner</strong> · Aprendé. Creá. Emprendé.</span><span>Sin conexión · Sin cuentas · Datos locales</span></footer>
+  </main><button type="button" id="mobile-result" class="mobile-result"><span>Venta del pedido<strong id="mobile-price">Ingresá el peso</strong></span><span>Ver resultado ↗</span></button>
+<script>
+'use strict';
+
+/* Fórmulas puras: todos los importes se calculan con precisión completa.
+   Sólo la presentación usa dos decimales. No hay llamadas de red. */
+const CostEngine = (() => {
+  const defaults = () => ({
+    materials: ['PLA', 'PETG', 'ABS', 'TPU', 'ASA', 'Otro'].map((name, i) => ({id: `mat-${i}`, name, price: 25000, weight: 1000})),
+    kwh: 150, watts: 100, machine: 300, labor: 6000,
+    waste: 5, risk: 10, method: 'markup', profit: 50, currency: '$'
+  });
+  function number(value, label, {min = 0, max = 1e9, integer = false, optional = false} = {}) {
+    if (value === '' || value === undefined || value === null) {
+      if (optional) return 0;
+      throw new Error(`${label}: completá este dato.`);
+    }
+    if (typeof value !== 'number' && typeof value !== 'string') throw new Error(`${label}: ingresá un número válido.`);
+    const n = Number(value);
+    if (!Number.isFinite(n) || (typeof value === 'string' && !value.trim())) throw new Error(`${label}: ingresá un número válido.`);
+    if (n < min || n > max || (integer && !Number.isInteger(n))) throw new Error(`${label}: debe ser ${integer ? 'un entero ' : ''}entre ${min} y ${max}.`);
+    return n;
+  }
+  function validateConfig(c) {
+    if (!c || !Array.isArray(c.materials) || !c.materials.length) throw new Error('Agregá al menos un material.');
+    const ids = new Set();
+    c.materials.forEach(m => {
+      if (!m || typeof m.id !== 'string' || ids.has(m.id) || typeof m.name !== 'string' || !m.name.trim() || m.name.length > 40) throw new Error('Revisá los nombres de los materiales.');
+      ids.add(m.id);
+      number(m.price, `Precio de ${m.name}`);
+      number(m.weight, `Peso del rollo de ${m.name}`, {min: 0.001});
+    });
+    ['kwh', 'watts', 'machine', 'labor'].forEach(key => number(c[key], key));
+    ['waste', 'risk', 'profit'].forEach(key => number(c[key], key, {max: 1000}));
+    if (!['markup', 'margin'].includes(c.method)) throw new Error('Elegí un método de rentabilidad válido.');
+    if (c.method === 'margin' && Number(c.profit) >= 100) throw new Error('El margen sobre venta debe ser menor al 100%.');
+    if (typeof c.currency !== 'string' || !c.currency.trim() || c.currency.length > 12) throw new Error('Ingresá un símbolo de moneda de hasta 12 caracteres.');
+    return c;
+  }
+  function roundUp(value, step) {
+    if (!Number.isFinite(value) || value < 0 || ![0, 100, 500, 1000].includes(step)) throw new Error('No se puede redondear este precio.');
+    return step ? Math.ceil(value / step) * step : value;
+  }
+  function calculate(job, config) {
+    validateConfig(config);
+    const m = config.materials.find(material => material.id === job.material);
+    if (!m) throw new Error('Seleccioná un material disponible.');
+    const units = number(job.units, 'Cantidad de unidades', {min: 1, max: 1e6, integer: true});
+    // Los registros anteriores no tenían alcance: sus datos eran del trabajo completo.
+    const scope = job.scope ?? 'total';
+    if (!['unit', 'total'].includes(scope)) throw new Error('Elegí si los datos son por pieza o por trabajo.');
+    const factor = scope === 'unit' ? units : 1;
+    const grams = number(job.grams, 'Peso ingresado') * factor;
+    const hours = (number(job.hours, 'Horas', {max: 1e6, integer: true, optional: true}) + number(job.minutes, 'Minutos', {max: 59, integer: true, optional: true}) / 60) * factor;
+    const waste = number(job.waste, 'Desperdicio', {max: 1000, optional: true});
+    const riskRate = number(job.risk, 'Riesgo', {max: 1000, optional: true});
+    const profitRate = number(job.profit, 'Rentabilidad', {max: 1000, optional: true});
+    if (!['markup', 'margin'].includes(job.method)) throw new Error('Seleccioná un método válido.');
+    if (job.method === 'margin' && profitRate >= 100) throw new Error('El margen sobre venta debe ser menor al 100%.');
+    if (!Array.isArray(job.extras)) throw new Error('Revisá los gastos adicionales.');
+    const totalGrams = grams * (1 + waste / 100);
+    const rolls = Math.ceil(totalGrams / Number(m.weight));
+    const rollPurchase = rolls * Number(m.price);
+    const leftoverGrams = rolls * Number(m.weight) - totalGrams;
+    const material = Number(m.price) / Number(m.weight) * totalGrams;
+    const kwh = Number(config.watts) / 1000 * hours;
+    const electricity = kwh * Number(config.kwh);
+    const machine = job.machineEnabled ? hours * Number(config.machine) : 0;
+    const laborMinutes = number(job.preparation, 'Preparación', {max: 1e6, optional: true}) + number(job.finishing, 'Postprocesado', {max: 1e6, optional: true});
+    const labor = laborMinutes / 60 * Number(config.labor);
+    const extras = job.extras.reduce((sum, item) => sum + number(item.amount, 'Importe adicional', {optional: true}), 0);
+    const productive = material + electricity + machine + labor;
+    const risk = productive * riskRate / 100;
+    const total = productive + risk + extras;
+    const costUnit = total / units;
+    const mathematicalPrice = job.method === 'markup' ? total * (1 + profitRate / 100) : total / (1 - profitRate / 100);
+    const saleUnit = roundUp(mathematicalPrice / units, Number(job.rounding));
+    const saleTotal = saleUnit * units;
+    const profit = saleTotal - total;
+    const margin = saleTotal > 0 ? profit / saleTotal * 100 : 0;
+    const result = {material, electricity, machine, labor, extras, risk, productive, total, costUnit, mathematicalPrice, saleUnit, saleTotal, profit, margin, hours, kwh, units, grams, totalGrams, rolls, rollPurchase, leftoverGrams};
+    if (Object.values(result).some(value => !Number.isFinite(value) || Math.abs(value) > Number.MAX_SAFE_INTEGER)) throw new Error('Los importes son demasiado grandes. Revisá las cantidades y tarifas.');
+    return result;
+  }
+  return {defaults, validateConfig, number, calculate, roundUp};
+})();
+if (typeof module !== 'undefined' && module.exports) module.exports = CostEngine;
+
+if (typeof document !== 'undefined') (() => {
+  const $ = id => document.getElementById(id);
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const id = () => `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  const keys = {config: 'capa3d.config.v1', history: 'capa3d.history.v1'};
+  let config = CostEngine.defaults();
+  let history = [];
+  let snapshot = null;
+  let loadedId = null;
+  let lastResult = null;
+  const fmt = value => new Intl.NumberFormat('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(value);
+  const money = (value, currency = activeConfig().currency) => `${currency} ${fmt(value)}`;
+  const activeConfig = () => snapshot || config;
+  function notice(message) { $('status').textContent = message; $('status').hidden = false; }
+  function storageWarning(message) { $('storage-warning').textContent = message; $('storage-warning').hidden = false; }
+  function write(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch { storageWarning('El navegador no pudo guardar los datos. Puede estar lleno o bloquear el almacenamiento local. Los cambios siguen disponibles en esta sesión, pero no se conservarán al cerrar.'); return false; }
+  }
+  try {
+    const rawConfig = localStorage.getItem(keys.config);
+    if (rawConfig) config = CostEngine.validateConfig(JSON.parse(rawConfig));
+  } catch { storageWarning('No se pudo leer la configuración guardada. Se cargaron valores de ejemplo; revisalos antes de presupuestar.'); }
+  try {
+    const rawHistory = localStorage.getItem(keys.history);
+    if (rawHistory) {
+      const parsed = JSON.parse(rawHistory);
+      if (!Array.isArray(parsed)) throw new Error('Historial inválido');
+      history = parsed.filter(entry => {
+        try {
+          if (!entry || typeof entry.id !== 'string' || typeof entry.job?.name !== 'string' || !Number.isFinite(Date.parse(entry.date))) return false;
+          CostEngine.calculate(entry.job, entry.config); return true;
+        } catch { return false; }
+      });
+      if (history.length !== parsed.length) storageWarning('Algunos registros del historial están dañados y no se pudieron cargar. Los cálculos válidos siguen disponibles.');
+    }
+  } catch { storageWarning('No se pudo leer el historial. Los datos originales no se reemplazarán hasta que guardes otro cálculo.'); }
+
+  function showView(view) {
+    $('mobile-result').hidden = view !== 'calculator';
+    $('status').hidden = true;
+    document.querySelectorAll('.view').forEach(el => { el.hidden = el.id !== view; });
+    document.querySelectorAll('[data-view]').forEach(el => { const active = el.dataset.view === view; el.classList.toggle('active', active); if (active) el.setAttribute('aria-current', 'page'); else el.removeAttribute('aria-current'); });
+    if (view === 'history') renderHistory();
+  }
+  function materialOptions(selected) {
+    $('material').replaceChildren();
+    activeConfig().materials.forEach(m => { const option = document.createElement('option'); option.value = m.id; option.textContent = m.name; $('material').append(option); });
+    if (activeConfig().materials.some(m => m.id === selected)) $('material').value = selected;
+  }
+  function inputValue(input) { return input.validity.badInput ? 'invalid' : input.value; }
+  function getJob() {
+    return {name: $('job-name').value.trim(), scope: $('input-scope').value, material: $('material').value, units: inputValue($('units')), grams: inputValue($('grams')), hours: inputValue($('hours')), minutes: inputValue($('minutes')), waste: inputValue($('waste')), risk: inputValue($('risk')), method: $('method').value, profit: inputValue($('profit')), rounding: $('rounding').value, machineEnabled: $('machine-enabled').checked, preparation: inputValue($('preparation')), finishing: inputValue($('finishing')), extras: [...$('extras').children].map(row => ({name: row.querySelector('.extra-name').value.trim(), amount: inputValue(row.querySelector('.extra-amount'))}))};
+  }
+  function addExtra(extra = {name: '', amount: ''}) {
+    const row = document.createElement('div'); row.className = 'extra-row';
+    const name = document.createElement('input'); name.className = 'extra-name'; name.type = 'text'; name.maxLength = 80; name.placeholder = 'Ej. Packaging'; name.setAttribute('aria-label', 'Nombre del gasto'); name.value = extra.name;
+    const amount = document.createElement('input'); amount.className = 'extra-amount'; amount.type = 'number'; amount.min = '0'; amount.max = '1000000000'; amount.step = 'any'; amount.placeholder = '0'; amount.setAttribute('aria-label', 'Importe del gasto'); amount.value = extra.amount;
+    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'delete-button'; remove.textContent = '×'; remove.setAttribute('aria-label', 'Eliminar gasto'); remove.onclick = () => { row.remove(); update(); };
+    row.append(name, amount, remove); $('extras').append(row);
+  }
+  function fillJob(job) {
+    $('input-scope').value = job.scope ?? 'total';
+    materialOptions(job.material);
+    const fields = {'job-name': 'name', units: 'units', grams: 'grams', hours: 'hours', minutes: 'minutes', waste: 'waste', risk: 'risk', method: 'method', profit: 'profit', rounding: 'rounding', preparation: 'preparation', finishing: 'finishing'};
+    Object.entries(fields).forEach(([field, key]) => { $(field).value = job[key] ?? ''; });
+    $('machine-enabled').checked = !!job.machineEnabled;
+    $('extras').replaceChildren(); job.extras.forEach(addExtra);
+    document.querySelector('.extras-section').open = job.extras.length > 0;
+    document.querySelector('.advanced-costs').open = job.extras.length > 0 || Number(job.preparation) > 0 || Number(job.finishing) > 0;
+    $('snapshot-notice').hidden = !snapshot;
+    update();
+  }
+  function newJob() {
+    snapshot = null; loadedId = null;
+    fillJob({name: '', scope: 'unit', material: config.materials[0].id, units: 1, grams: '', hours: '', minutes: '', waste: config.waste, risk: config.risk, method: config.method, profit: config.profit, rounding: 0, machineEnabled: true, preparation: '', finishing: '', extras: []});
+    $('status').hidden = true; showView('calculator');
+  }
+  function update() {
+    const c = activeConfig(), j = getJob();
+    const perUnit = j.scope === 'unit';
+    $('weight-label').textContent = perUnit ? 'Peso de una pieza (g)' : 'Peso del trabajo (g)';
+    $('time-scope').textContent = perUnit ? 'De una pieza' : 'Del trabajo completo';
+    $('scope-help').textContent = perUnit ? 'Multiplicamos el peso y el tiempo de una pieza por la cantidad. La mano de obra y los extras se ingresan para todo el pedido.' : 'El peso y el tiempo ya incluyen todas las unidades: no se multiplican. La mano de obra y los extras también son del pedido completo.';
+    const m = c.materials.find(material => material.id === j.material);
+    $('profit-label').textContent = j.method === 'margin' ? 'Margen deseado (%)' : 'Recargo deseado (%)';
+    $('profit').max = j.method === 'margin' ? '99.999999' : '1000';
+    $('method-help').textContent = j.method === 'margin' ? 'El margen es la ganancia como parte del precio de venta. Con 40%, un costo de 100 se vende a 166,67.' : 'El recargo se suma al costo. Con 50%, un costo de 100 se vende a 150; el margen sobre la venta es 33,33%.';
+    $('extras-count').textContent = `${j.extras.length} ${j.extras.length === 1 ? 'gasto' : 'gastos'}`;
+    if (m) $('material-rate').textContent = `${money(Number(m.price))} / ${new Intl.NumberFormat('es-AR').format(m.weight)} g · ${money(Number(m.price) / Number(m.weight))}/g`;
+    $('electricity-rate').textContent = `${c.watts} W · ${money(Number(c.kwh))}/kWh`;
+    $('machine-rate').textContent = `${money(Number(c.machine))}/hora de impresión`;
+    $('labor-rate').textContent = `Valor de tu hora: ${money(Number(c.labor))}. Se cuenta sólo tu trabajo manual.`;
+    [...$('rounding').options].forEach(option => { if (option.value !== '0') option.textContent = `A ${c.currency} ${Number(option.value).toLocaleString('es-AR')}`; });
+    $('job-form').querySelectorAll('input[type=number]').forEach(input => { input.setAttribute('aria-invalid', String(!input.validity.valid)); });
+    try {
+      const invalid = [...$('job-form').querySelectorAll('input[type=number]')].find(input => !input.validity.valid);
+      // The engine gives specific field errors; native validation also protects step/badInput cases.
+      const r = CostEngine.calculate(j, c);
+      if (invalid) throw new Error('Revisá el campo resaltado: ingresá un número dentro del rango permitido.');
+      lastResult = r;
+      $('mobile-price').textContent = money(r.saleTotal);
+      $('save-job').textContent = loadedId ? 'Guardar cambios del trabajo' : 'Guardar cálculo';
+      $('form-errors').hidden = true;
+      $('sale-total').textContent = money(r.saleTotal);
+      $('sale-unit').textContent = money(r.saleUnit);
+      $('unit-count').textContent = `× ${r.units}`;
+      $('profit-total').textContent = money(r.profit);
+      $('order-grams').textContent = `${fmt(r.totalGrams)} g`;
+      $('order-rolls').textContent = `${r.rolls.toLocaleString('es-AR')} ${r.rolls === 1 ? 'rollo' : 'rollos'} de ${Number(m.weight).toLocaleString('es-AR')} g`;
+      $('order-purchase').textContent = money(r.rollPurchase);
+      $('order-leftover').textContent = `${fmt(r.leftoverGrams)} g`;
+      $('order-material').textContent = money(r.material);
+      $('real-margin').textContent = `${fmt(r.margin)}%`;
+      ['material', 'electricity', 'machine', 'labor', 'extras', 'risk'].forEach(key => { $(`cost-${key}`).textContent = money(r[key]); });
+      $('cost-total').textContent = money(r.total); $('cost-unit').textContent = money(r.costUnit);
+      ['material', 'electricity', 'machine'].forEach(key => { $(`${key}-subtotal`).textContent = money(r[key]); });
+      const totalMinutes = Math.round(r.hours * 60);
+      $('time-total').textContent = `${Math.floor(totalMinutes / 60)} h ${String(totalMinutes % 60).padStart(2, '0')} min`;
+      $('cost-bar').replaceChildren();
+      ['material', 'electricity', 'machine', 'labor', 'extras', 'risk'].forEach(key => { const segment = document.createElement('span'); segment.className = `${key}-color`; segment.style.width = `${r.total ? r[key] / r.total * 100 : 0}%`; $('cost-bar').append(segment); });
+      $('save-job').disabled = false;
+    } catch (error) {
+      lastResult = null;
+      $('mobile-price').textContent = 'Completá los datos';
+      ['sale-total','sale-unit','profit-total','real-margin','cost-total','cost-unit','material-subtotal','electricity-subtotal','machine-subtotal','time-total','order-grams','order-rolls','order-purchase','order-leftover','order-material', ...['material','electricity','machine','labor','extras','risk'].map(key => `cost-${key}`)].forEach(key => { $(key).textContent = '—'; });
+      $('unit-count').textContent = ''; $('cost-bar').replaceChildren();
+      $('form-errors').textContent = error.message; $('form-errors').hidden = false; $('save-job').disabled = true;
+      if (j.grams === '' && j.name === '' && j.hours === '' && j.minutes === '') {
+        $('form-errors').textContent = 'Ingresá el peso de tu pieza para empezar. El resultado se actualiza automáticamente.';
+        $('grams').setAttribute('aria-invalid', 'false');
+        $('mobile-price').textContent = 'Ingresá el peso';
+      }
+    }
+  }
+  function saveJob() {
+    update(); if (!lastResult) return;
+    const job = getJob();
+    if (!job.name) { notice('Poné un nombre al trabajo para guardarlo en el historial.'); $('job-name').focus(); return; }
+    const entry = {id: loadedId || id(), date: new Date().toISOString(), job: clone(job), config: clone(activeConfig()), result: clone(lastResult)};
+    const index = history.findIndex(item => item.id === entry.id);
+    if (index >= 0) history[index] = entry; else history.unshift(entry);
+    loadedId = entry.id;
+    const saved = write(keys.history, history);
+    $('history-count').textContent = history.length;
+    notice(saved ? 'Cálculo guardado. Podés encontrarlo en el historial.' : 'Cálculo disponible en el historial de esta sesión. No se pudo guardar de forma permanente.');
+  }
+  function loadJob(entry) {
+    snapshot = clone(entry.config); loadedId = entry.id;
+    fillJob(clone(entry.job)); showView('calculator'); notice(`Cargaste «${entry.job.name}». Guardar actualizará este trabajo.`);
+    window.scrollTo({top: 0, behavior: 'instant'});
+  }
+  function duplicateJob(entry) {
+    const copy = clone(entry); copy.id = id(); copy.date = new Date().toISOString(); copy.job.name = `${entry.job.name.slice(0, 92)} (copia)`;
+    history.unshift(copy); const saved = write(keys.history, history); renderHistory();
+    notice(saved ? 'Copia guardada en el historial. Podés cargarla para editarla.' : 'Copia creada sólo para esta sesión.');
+  }
+  function renderHistory() {
+    $('history-count').textContent = history.length; $('history-list').replaceChildren();
+    if (!history.length) { const empty = document.createElement('div'); empty.className = 'empty-state'; const heading = document.createElement('h3'); heading.textContent = 'Tu próxima impresión empieza acá.'; const p = document.createElement('p'); p.textContent = 'Guardá un cálculo con el nombre del trabajo y lo vas a encontrar en este espacio.'; empty.append(heading,p); $('history-list').append(empty); return; }
+    [...history].sort((a,b) => Date.parse(b.date) - Date.parse(a.date)).forEach(entry => {
+      const r = CostEngine.calculate(entry.job, entry.config), j = entry.job, c = entry.config;
+      const card = document.createElement('article'); card.className = 'card history-card';
+      const info = document.createElement('div'); const heading = document.createElement('h3'); heading.textContent = j.name;
+      const date = document.createElement('time'); date.dateTime = entry.date; date.textContent = new Date(entry.date).toLocaleString('es-AR', {dateStyle: 'medium', timeStyle: 'short'});
+      const meta = document.createElement('p'); meta.className = 'history-meta'; meta.textContent = `${c.materials.find(m => m.id === j.material).name} · ${j.grams} g · ${j.hours || 0} h ${j.minutes || 0} min (${j.scope === "unit" ? "por pieza" : "trabajo completo"}) · ${j.units} unidad(es)`;
+      info.append(heading,date,meta);
+      const price = document.createElement('div'); price.className = 'history-price'; price.textContent = money(r.saleTotal, c.currency); const caption = document.createElement('small'); caption.textContent = 'Precio sugerido total'; price.append(caption);
+      const details = document.createElement('details'); details.className = 'history-details'; const summary = document.createElement('summary'); summary.textContent = `Costo: ${money(r.total, c.currency)} · Ver desglose`;
+      const breakdown = document.createElement('p'); breakdown.textContent = `Material: ${money(r.material,c.currency)} · Electricidad: ${money(r.electricity,c.currency)} · Máquina: ${money(r.machine,c.currency)} · Mano de obra: ${money(r.labor,c.currency)} · Extras: ${money(r.extras,c.currency)} · Riesgo: ${money(r.risk,c.currency)}. Costo por unidad: ${money(r.costUnit,c.currency)}. Venta por unidad: ${money(r.saleUnit,c.currency)}. Ganancia: ${money(r.profit,c.currency)}. Margen real: ${fmt(r.margin)}%.`;
+      const supply = document.createElement("p"); supply.textContent = `Pedido: ${fmt(r.totalGrams)} g con desperdicio · ${r.rolls} rollo(s) · Compra: ${money(r.rollPurchase,c.currency)} · Sobrante: ${fmt(r.leftoverGrams)} g.`; details.append(summary,breakdown,supply);
+      const actions = document.createElement('div'); actions.className = 'history-actions';
+      [['Cargar', () => loadJob(entry)], ['Duplicar', () => duplicateJob(entry)], ['Eliminar', () => {
+        if (!window.confirm(`¿Eliminar «${j.name}» del historial?`)) return;
+        history = history.filter(item => item.id !== entry.id); if (loadedId === entry.id) loadedId = null;
+        const saved = write(keys.history, history); renderHistory(); notice(saved ? 'Trabajo eliminado del historial.' : 'Trabajo eliminado en esta sesión. No se pudo actualizar el historial guardado.');
+      }]].forEach(([title, handler]) => { const button = document.createElement('button'); button.textContent = title; button.className = `button secondary small${title === 'Eliminar' ? ' danger' : ''}`; button.onclick = handler; actions.append(button); });
+      card.append(info,price,details,actions); $('history-list').append(card);
+    });
+  }
+  function addMaterial(material = {id: id(), name: '', price: 25000, weight: 1000}) {
+    const row = document.createElement('div'); row.className = 'material-row'; row.dataset.id = material.id;
+    [['name','Material','text'],['price','Precio del rollo','number'],['weight','Peso del rollo (g)','number']].forEach(([key,label,type]) => {
+      const wrapper = document.createElement('label'); wrapper.dataset.mobileLabel = label;
+      const input = document.createElement('input'); input.type = type; input.dataset.key = key; input.value = material[key]; input.required = true; input.setAttribute('aria-label', label);
+      if (type === 'number') { input.min = key === 'weight' ? '0.001' : '0'; input.max = '1000000000'; input.step = 'any'; } else input.maxLength = 40;
+      wrapper.append(input); row.append(wrapper);
+    });
+    const button = document.createElement('button'); button.type = 'button'; button.className = 'delete-button'; button.textContent = '×'; button.setAttribute('aria-label', 'Eliminar material'); button.onclick = () => {
+      if ($('materials-editor').children.length === 1) { $('settings-errors').textContent = 'Conservá al menos un material.'; $('settings-errors').hidden = false; return; }
+      row.remove();
+    };
+    row.append(button); $('materials-editor').append(row);
+  }
+  function renderSettings() {
+    $('materials-editor').replaceChildren(); config.materials.forEach(addMaterial);
+    ['kwh','watts','machine','labor','waste','risk','method','profit','currency'].forEach(key => { $(`s-${key}`).value = config[key]; });
+    $('settings-errors').hidden = true;
+  }
+  function saveSettings(event) {
+    event.preventDefault();
+    try {
+      const c = {};
+      ['kwh','watts','machine','labor','waste','risk','profit'].forEach(key => { c[key] = CostEngine.number(inputValue($(`s-${key}`)), $(`s-${key}`).parentElement.textContent.trim()); });
+      c.method = $('s-method').value; c.currency = $('s-currency').value.trim();
+      c.materials = [...$('materials-editor').children].map(row => ({id: row.dataset.id, name: row.querySelector('[data-key=name]').value.trim(), price: CostEngine.number(inputValue(row.querySelector('[data-key=price]')), 'Precio del rollo'), weight: CostEngine.number(inputValue(row.querySelector('[data-key=weight]')), 'Peso del rollo', {min: 0.001})}));
+      CostEngine.validateConfig(c);
+      if (!$('settings-form').checkValidity()) throw new Error('Revisá los valores: hay un campo vacío o fuera del rango permitido.');
+      const material = $('material').value;
+      config = c; snapshot = null; $('snapshot-notice').hidden = true;
+      const saved = write(keys.config, config); materialOptions(material); update(); $('settings-errors').hidden = true;
+      notice(saved ? 'Configuración guardada. Las tarifas ya se aplican al cálculo abierto.' : 'Configuración aplicada sólo para esta sesión.');
+    } catch(error) { $('settings-errors').textContent = error.message; $('settings-errors').hidden = false; $('settings-form').reportValidity(); }
+  }
+  document.querySelectorAll('[data-view]').forEach(button => { button.onclick = () => showView(button.dataset.view); });
+  document.querySelectorAll('[data-go-settings]').forEach(button => { button.onclick = () => showView('settings'); });
+  $('job-form').addEventListener('input', update); $('job-form').addEventListener('change', update); $('job-form').addEventListener('submit', e => e.preventDefault());
+  $('new-job').onclick = newJob; $('save-job').onclick = saveJob;
+  const goTo = target => { target.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start'}); target.focus({preventScroll: true}); };
+  $('mobile-result').onclick = () => goTo($('results'));
+  $('back-to-fields').onclick = () => goTo($('job-name'));
+  [['less-unit', -1], ['more-unit', 1]].forEach(([button, delta]) => {
+    $(button).onclick = () => { const current = Number($('units').value); $('units').value = Math.min(1000000, Math.max(1, (Number.isFinite(current) ? Math.floor(current) : 1) + delta)); update(); };
+  });
+  $('add-extra').onclick = () => { addExtra(); update(); $('extras').lastElementChild.querySelector('input').focus(); };
+  $('add-material').onclick = () => { addMaterial(); $('materials-editor').lastElementChild.querySelector('input').focus(); };
+  $('settings-form').addEventListener('submit', saveSettings);
+  $('s-method').onchange = () => { $('s-profit').max = $('s-method').value === 'margin' ? '99.999999' : '1000'; };
+  $('reset-settings').onclick = () => {
+    if (!window.confirm('¿Restablecer materiales y tarifas a los valores de ejemplo? El historial se conserva.')) return;
+    config = CostEngine.defaults(); snapshot = null; const saved = write(keys.config, config); renderSettings(); materialOptions(); $('snapshot-notice').hidden = true; update(); notice(saved ? 'Configuración restablecida. El historial se conserva.' : 'Configuración restablecida sólo para esta sesión.');
+  };
+  $('use-current').onclick = () => { const material = $('material').value; snapshot = null; materialOptions(material); $('snapshot-notice').hidden = true; update(); notice('El cálculo usa ahora las tarifas actuales. Guardá para actualizarlo en el historial.'); };
+  renderSettings(); renderHistory(); newJob();
+})();
+
+</script>
+</body>
+</html>
