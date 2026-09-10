@@ -21,6 +21,10 @@ body{background:linear-gradient(180deg,#f0e9fc 0,#f8f7fb 380px)}.topbar{height:8
 /* Selector principal entre la experiencia guiada y la calculadora completa. */
 .mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:min(620px,100%);margin:0 auto 34px;padding:6px;border:1px solid #ded2eb;border-radius:16px;background:#fff;box-shadow:0 7px 24px #3613580b}.mode-tab{display:flex;flex-direction:column;gap:2px;padding:13px 20px;border:0;border-radius:11px;background:transparent;color:#6c617b;text-align:left}.mode-tab span{font-size:14px;font-weight:750}.mode-tab small{font-size:10px;color:#8c8198}.mode-tab.active{background:linear-gradient(135deg,#6818ce,#812de1);color:#fff;box-shadow:0 6px 15px #6818ce2c}.mode-tab.active small{color:#eadcff}.basic-intro{text-align:center;max-width:680px;margin:58px auto 35px}.basic-badge{display:inline-block;padding:5px 10px;border-radius:30px;background:#e8d7ff;color:#6621b3;font-size:9px;font-weight:800;letter-spacing:1.2px}.basic-intro h1{margin:14px 0 8px}.basic-intro p{color:var(--muted);font-size:15px}.basic-preview-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;max-width:900px;margin:auto}.basic-preview-card{margin:0}.basic-preview-card h2{margin:15px 0 20px;font-size:21px}.basic-preview-item{display:flex;justify-content:space-between;gap:25px;padding:15px 0;border-top:1px solid var(--border)}.basic-preview-item strong{font-size:13px}.basic-preview-item span{max-width:55%;color:var(--muted);font-size:12px;text-align:right}.basic-preview-item.featured{margin:7px -9px -7px;padding:15px 10px;border:0;border-radius:10px;background:#f2e9fe}.basic-preview-item.featured strong{color:#6519c4}.basic-next{padding:30px;border-radius:15px;background:linear-gradient(145deg,#25103e,#253459);color:white}.basic-next>span{font-size:9px;letter-spacing:1.3px;color:#bfa7dd;text-transform:uppercase}.basic-next h2{font-size:23px;line-height:1.25;margin:15px 0 12px}.basic-next p{color:#cbbfd8;font-size:13px;line-height:1.7}.mode-panel[hidden]{display:none!important}
 @media(max-width:700px){.mode-tabs{margin-bottom:25px}.mode-tab{padding:11px 12px}.mode-tab small{display:none}.mode-tab{text-align:center}.basic-intro{margin:38px auto 25px}.basic-preview-grid{grid-template-columns:1fr}.basic-next{padding:24px}.basic-preview-item{align-items:start}}
+.basic-calculator-layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:24px;align-items:start}.basic-form .card{margin-bottom:18px}.basic-results .result-card{padding:28px}.basic-results dl{padding:4px 0 14px}.basic-results .total-row{border-top:1px solid #ffffff20;padding-top:16px}.basic-results .total-row.sub{border:0;padding-top:0}.basic-results .result-error{margin-top:18px}.basic-intro{margin-top:30px}.basic-intro h1{font-size:30px}.basic-intro p{margin-top:0}
+@media(min-width:1100px){.basic-results{position:sticky;top:16px}}
+@media(max-width:900px){.basic-calculator-layout{grid-template-columns:1fr}.basic-results{position:static}}
+@media(max-width:560px){.basic-form .three{grid-template-columns:1fr 1fr}.basic-form .three label:first-child{grid-column:1/-1}.basic-calculator-layout{gap:16px}.basic-intro{text-align:left;margin-top:28px}.basic-intro h1{font-size:27px}}
 
 </style>
   
@@ -33,10 +37,14 @@ body{background:linear-gradient(180deg,#f0e9fc 0,#f8f7fb 380px)}.topbar{height:8
       <button type="button" class="mode-tab" data-mode="basic"><span>Modo básico</span><small>Cálculo rápido para alumnos</small></button>
     </nav>
     <section id="basic-mode" class="mode-panel" hidden>
-      <div class="basic-intro"><span class="basic-badge">PRÓXIMA ETAPA</span><h1>Modo básico</h1><p>Un cálculo corto para aprender a presupuestar una impresión sin completar todos los costos del modo experto.</p></div>
-      <div class="basic-preview-grid">
-        <section class="card basic-preview-card"><span class="step">01</span><h2>Datos esenciales</h2><div class="basic-preview-item"><strong>Cantidad y peso</strong><span>Costo proporcional del material usado</span></div><div class="basic-preview-item"><strong>Tiempo de trabajo</strong><span>Horas × valor definido por hora</span></div><div class="basic-preview-item"><strong>Resultado directo</strong><span>Costo por unidad y costo total</span></div><div class="basic-preview-item featured"><strong>Precio de venta sugerido</strong><span>Valor por unidad, venta total y ganancia estimada</span></div></section>
-        <aside class="basic-next"><span>Para completar este modo</span><h2>Definimos juntos la fórmula simple</h2><p>Esta solapa ya está separada del modo experto. Falta establecer qué incluye el valor hora y cómo calcularemos el precio sugerido y la ganancia para los alumnos.</p></aside>
+      <div class="basic-intro"><span class="basic-badge">CÁLCULO RÁPIDO</span><h1>Modo básico</h1><p>Calculá material, horas de trabajo y un precio sugerido en pocos pasos.</p></div>
+      <div class="basic-calculator-layout">
+        <form id="basic-form" class="basic-form" novalidate>
+          <section class="card"><div class="section-title"><span class="step">01</span><h2>Pieza y cantidad</h2></div><div class="grid three"><label>Material<select id="b-material"></select></label><label>Peso de una pieza (g)<input id="b-grams" type="number" min="0" max="1000000000" step="any" placeholder="Ej. 85" required></label><label>Cantidad<input id="b-units" type="number" min="1" max="1000000" step="1" value="1" required></label></div><div class="mini-summary"><span id="b-material-rate">—</span><button type="button" class="text-button" data-basic-settings>Editar materiales ↗</button></div></section>
+          <section class="card"><div class="section-title"><span class="step">02</span><h2>Tiempo y valor hora</h2></div><div class="grid three"><label>Horas por pieza<input id="b-hours" type="number" min="0" max="1000000" step="1" placeholder="0"></label><label>Minutos por pieza<input id="b-minutes" type="number" min="0" max="59" step="1" placeholder="0"></label><label>Valor por hora<input id="b-hourly" type="number" min="0" max="1000000000" step="any" required></label></div><p class="hint callout">El valor hora representa el precio de tu tiempo y del trabajo de impresión. El tiempo por pieza se multiplica por la cantidad.</p></section>
+          <section class="card"><div class="section-title"><span class="step">03</span><h2>Precio sugerido</h2></div><div class="grid two"><label>Recargo sobre el costo (%) <span class="help" tabindex="0" data-help="Es el porcentaje que se suma al costo básico para obtener el precio sugerido.">?</span><input id="b-markup" type="number" min="0" max="1000" step="any" required></label><label>Redondear precio por unidad<select id="b-rounding"><option value="0">Sin redondear</option><option value="100">A 100</option><option value="500">A 500</option><option value="1000">A 1.000</option></select></label></div></section>
+        </form>
+        <aside id="basic-results" class="results basic-results" tabindex="-1"><div class="result-card"><div class="result-heading"><span class="eyebrow">RESULTADO BÁSICO</span><span class="live-dot">En vivo</span></div><h2>Precio sugerido total</h2><div id="b-sale-total" class="hero-price">—</div><p class="unit-price"><strong id="b-sale-unit">—</strong> por unidad <span id="b-unit-count"></span></p><div id="b-errors" role="alert" class="result-error">Ingresá el peso de la pieza para empezar.</div><div class="profit-strip"><div><span>Ganancia estimada total</span><strong id="b-profit">—</strong></div><div><span>Recargo aplicado</span><strong id="b-markup-view">—</strong></div></div><h3>RESUMEN DEL PEDIDO</h3><dl><div><dt>Material total</dt><dd id="b-total-grams">—</dd></div><div><dt>Costo proporcional del material</dt><dd id="b-material-cost">—</dd></div><div><dt>Horas totales</dt><dd id="b-total-hours">—</dd></div><div><dt>Costo por horas</dt><dd id="b-time-cost">—</dd></div></dl><div class="total-row"><span>Costo básico total</span><strong id="b-cost-total">—</strong></div><div class="total-row sub"><span>Costo básico por unidad</span><strong id="b-cost-unit">—</strong></div><p class="result-footnote">Costo básico = material proporcional + horas de trabajo</p></div><details class="formula-card"><summary>¿Cómo se calcula el modo básico?</summary><p>Material = precio del rollo ÷ peso del rollo × gramos por pieza × cantidad.</p><p>Horas = tiempo de una pieza × cantidad. Costo por horas = horas totales × valor por hora.</p><p>Costo básico = material + costo por horas. Precio sugerido = costo básico × (1 + recargo ÷ 100), con el redondeo elegido hacia arriba por unidad.</p><p>Para electricidad, desgaste, mano de obra separada, extras, riesgo o margen sobre venta, usá el modo Experto.</p></details></aside>
       </div>
     </section>
     <section id="expert-mode" class="mode-panel">
@@ -162,7 +170,29 @@ const CostEngine = (() => {
     if (Object.values(result).some(value => !Number.isFinite(value) || Math.abs(value) > Number.MAX_SAFE_INTEGER)) throw new Error('Los importes son demasiado grandes. Revisá las cantidades y tarifas.');
     return result;
   }
-  return {defaults, validateConfig, number, calculate, roundUp};
+  function calculateBasic(input, config) {
+    validateConfig(config);
+    const materialData = config.materials.find(item => item.id === input.material);
+    if (!materialData) throw new Error('Seleccioná un material disponible.');
+    const units = number(input.units, 'Cantidad', {min: 1, max: 1e6, integer: true});
+    const gramsPerUnit = number(input.grams, 'Peso de la pieza');
+    const hoursPerUnit = number(input.hours, 'Horas', {max: 1e6, integer: true, optional: true}) + number(input.minutes, 'Minutos', {max: 59, integer: true, optional: true}) / 60;
+    const hourly = number(input.hourly, 'Valor por hora');
+    const markup = number(input.markup, 'Recargo', {max: 1000});
+    const totalGrams = gramsPerUnit * units;
+    const totalHours = hoursPerUnit * units;
+    const material = Number(materialData.price) / Number(materialData.weight) * totalGrams;
+    const time = totalHours * hourly;
+    const total = material + time;
+    const costUnit = total / units;
+    const saleUnit = roundUp(costUnit * (1 + markup / 100), Number(input.rounding));
+    const saleTotal = saleUnit * units;
+    const profit = saleTotal - total;
+    const result = {units, gramsPerUnit, totalGrams, hoursPerUnit, totalHours, material, time, total, costUnit, saleUnit, saleTotal, profit, markup};
+    if (Object.values(result).some(value => !Number.isFinite(value) || Math.abs(value) > Number.MAX_SAFE_INTEGER)) throw new Error('Los valores son demasiado grandes. Revisá los datos.');
+    return result;
+  }
+  return {defaults, validateConfig, number, calculate, calculateBasic, roundUp};
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = CostEngine;
 
@@ -222,7 +252,31 @@ if (typeof document !== 'undefined') (() => {
       if (active) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current');
     });
     $('mobile-result').hidden = currentMode !== 'expert' || $('calculator').hidden;
+    if (currentMode === 'basic') updateBasic();
     window.scrollTo({top: 0, behavior: 'instant'});
+  }
+  function basicMaterialOptions(selected) {
+    $('b-material').replaceChildren();
+    config.materials.forEach(material => { const option = document.createElement('option'); option.value = material.id; option.textContent = material.name; $('b-material').append(option); });
+    if (config.materials.some(material => material.id === selected)) $('b-material').value = selected;
+  }
+  function getBasicInput() {
+    return {material: $('b-material').value, grams: inputValue($('b-grams')), units: inputValue($('b-units')), hours: inputValue($('b-hours')), minutes: inputValue($('b-minutes')), hourly: inputValue($('b-hourly')), markup: inputValue($('b-markup')), rounding: $('b-rounding').value};
+  }
+  function updateBasic() {
+    const input = getBasicInput(), material = config.materials.find(item => item.id === input.material);
+    const basicMoney = value => money(value, config.currency);
+    if (material) $('b-material-rate').textContent = `${basicMoney(Number(material.price))} el rollo de ${Number(material.weight).toLocaleString('es-AR')} g · ${basicMoney(Number(material.price) / Number(material.weight))}/g`;
+    [...$('b-rounding').options].forEach(option => { if (option.value !== '0') option.textContent = `A ${config.currency} ${Number(option.value).toLocaleString('es-AR')}`; });
+    $('basic-form').querySelectorAll('input[type=number]').forEach(field => field.setAttribute('aria-invalid', String(!field.validity.valid)));
+    try {
+      const result = CostEngine.calculateBasic(input, config);
+      if ([...$('basic-form').querySelectorAll('input[type=number]')].some(field => !field.validity.valid)) throw new Error('Revisá el campo resaltado.');
+      $('b-errors').hidden = true; $('b-sale-total').textContent = basicMoney(result.saleTotal); $('b-sale-unit').textContent = basicMoney(result.saleUnit); $('b-unit-count').textContent = `× ${result.units}`; $('b-profit').textContent = basicMoney(result.profit); $('b-markup-view').textContent = `${fmt(result.markup)}%`; $('b-total-grams').textContent = `${fmt(result.totalGrams)} g`; $('b-material-cost').textContent = basicMoney(result.material);
+      const minutes = Math.round(result.totalHours * 60); $('b-total-hours').textContent = `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, '0')} min`; $('b-time-cost').textContent = basicMoney(result.time); $('b-cost-total').textContent = basicMoney(result.total); $('b-cost-unit').textContent = basicMoney(result.costUnit);
+    } catch (error) {
+      ['b-sale-total','b-sale-unit','b-profit','b-markup-view','b-total-grams','b-material-cost','b-total-hours','b-time-cost','b-cost-total','b-cost-unit'].forEach(field => $(field).textContent = '—'); $('b-unit-count').textContent = ''; $('b-errors').textContent = input.grams === '' ? 'Ingresá el peso de la pieza para empezar.' : error.message; $('b-errors').hidden = false;
+    }
   }
   function materialOptions(selected) {
     $('material').replaceChildren();
@@ -390,12 +444,14 @@ if (typeof document !== 'undefined') (() => {
       if (!$('settings-form').checkValidity()) throw new Error('Revisá los valores: hay un campo vacío o fuera del rango permitido.');
       const material = $('material').value;
       config = c; snapshot = null; $('snapshot-notice').hidden = true;
-      const saved = write(keys.config, config); materialOptions(material); update(); $('settings-errors').hidden = true;
+      const saved = write(keys.config, config); materialOptions(material); update(); basicMaterialOptions($('b-material').value); updateBasic(); $('settings-errors').hidden = true;
       notice(saved ? 'Configuración guardada. Las tarifas ya se aplican al cálculo abierto.' : 'Configuración aplicada sólo para esta sesión.');
     } catch(error) { $('settings-errors').textContent = error.message; $('settings-errors').hidden = false; $('settings-form').reportValidity(); }
   }
   document.querySelectorAll('[data-view]').forEach(button => { button.onclick = () => showView(button.dataset.view); });
   document.querySelectorAll('[data-mode]').forEach(button => { button.onclick = () => showMode(button.dataset.mode); });
+  $('basic-form').addEventListener('input', updateBasic); $('basic-form').addEventListener('change', updateBasic); $('basic-form').addEventListener('submit', event => event.preventDefault());
+  document.querySelectorAll('[data-basic-settings]').forEach(button => { button.onclick = () => { showMode('expert'); showView('settings'); }; });
   document.querySelectorAll('[data-go-settings]').forEach(button => { button.onclick = () => showView('settings'); });
   $('job-form').addEventListener('input', update); $('job-form').addEventListener('change', update); $('job-form').addEventListener('submit', e => e.preventDefault());
   $('new-job').onclick = newJob; $('save-job').onclick = saveJob;
@@ -414,7 +470,7 @@ if (typeof document !== 'undefined') (() => {
     config = CostEngine.defaults(); snapshot = null; const saved = write(keys.config, config); renderSettings(); materialOptions(); $('snapshot-notice').hidden = true; update(); notice(saved ? 'Configuración restablecida. El historial se conserva.' : 'Configuración restablecida sólo para esta sesión.');
   };
   $('use-current').onclick = () => { const material = $('material').value; snapshot = null; materialOptions(material); $('snapshot-notice').hidden = true; update(); notice('El cálculo usa ahora las tarifas actuales. Guardá para actualizarlo en el historial.'); };
-  renderSettings(); renderHistory(); newJob(); showMode('expert');
+  renderSettings(); renderHistory(); basicMaterialOptions(); $('b-hourly').value = config.labor; $('b-markup').value = 50; newJob(); showMode('expert'); updateBasic();
 })();
 
 </script>
